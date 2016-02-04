@@ -3,9 +3,13 @@ var ocr = require("../src/ocr");
 
 describe('ocr', function () {
     describe('#parse', function () {
-        it('should return an empty string when the input is empty', function () {
-            expect('').to.eql(ocr.parse());
+        it('should return 000000000 when the all zeros are passed', function () {
+            expect('000000000').to.eql(ocr.parse(zeros));
         });
+        it('should return 111111111 when the all ones are passed', function () {
+            expect('111111111').to.eql(ocr.parse(ones));
+        });
+        // this is enough to convince me right now
     });
     describe('#tokenize', function () {
         it('should return zero for items from all zeros', function () {
