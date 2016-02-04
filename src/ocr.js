@@ -1,3 +1,20 @@
+// We are doing a lot of extra string manipulation right
+//  now. Things are relatively readable, and I am not seeing
+//  the obvious refactor yet, so dealing with it for now.
+
+function parseFile(file){
+    var lines = file.split('\n');
+    var i = 0;
+    var result = [];
+    while (i < lines.length) {
+        // This assumes a good number of lines
+        //      we might want to guard against
+        //      that eventually.
+        result.push(parse(lines.splice(i, i + 4).join('\n')));
+    }
+    return result.join('\n');
+}
+
 function parse(input) {
     var tokens = tokenize(input);
     return parseTokens(tokens);
@@ -111,5 +128,6 @@ var nine =
     '   ';
 
 
+module.exports.parseFile = parseFile;
 module.exports.parse = parse;
 module.exports.tokenize = tokenize;

@@ -2,6 +2,24 @@ var expect = require("chai").expect;
 var ocr = require("../src/ocr");
 
 describe('ocr', function () {
+    describe('#parseFile', function () {
+        it('should return the parsed versions of multiple numbers for a file', function () {
+            var input = [zeros,
+                         threes,
+                         fours,
+                         sevens,
+                         nines].join('\n');
+            
+            var expectedFile = ['000000000',
+                            '333333333',
+                            '444444444',
+                            '777777777',
+                            '999999999'].join('\n');
+            
+            
+            expect(expectedFile).to.eql(ocr.parseFile(input));
+        });
+    });
     describe('#parse', function () {
         it('should return 000000000 when the all zeros are passed', function () {
             expect('000000000').to.eql(ocr.parse(zeros));
