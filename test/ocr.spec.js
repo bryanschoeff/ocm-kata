@@ -5,18 +5,18 @@ describe('ocr', function () {
     describe('#parseFile', function () {
         it('should return the parsed versions of multiple numbers for a file', function () {
             var input = [zeros,
-                         threes,
-                         fours,
-                         sevens,
-                         nines].join('\n');
-            
+                threes,
+                fours,
+                sevens,
+                nines].join('\n');
+
             var expectedFile = ['000000000',
-                            '333333333',
-                            '444444444',
-                            '777777777',
-                            '999999999'].join('\n');
-            
-            
+                '333333333',
+                '444444444',
+                '777777777',
+                '999999999'].join('\n');
+
+
             expect(expectedFile).to.eql(ocr.parseFile(input));
         });
     });
@@ -79,6 +79,14 @@ describe('ocr', function () {
             expect(singleNine).to.eql(ocr.tokenize(nines)[0]);
             expect(singleNine).to.eql(ocr.tokenize(nines)[8]);
             expect(singleNine).to.eql(ocr.tokenize(nines)[3]);
+        });
+    });
+    describe('#isValid', function () {
+        it('should return valid for the checksum on 345882865', function () {
+            expect(ocr.isValid('345882865')).to.be.true;
+        });
+        it('should return invalid for the checksum on 345882866', function () {
+            expect(ocr.isValid('345882866')).to.be.false;
         });
     });
 });

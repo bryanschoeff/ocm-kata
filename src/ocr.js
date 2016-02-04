@@ -31,6 +31,13 @@ function tokenize(input) {
     return tokens;
 }
 
+function isValid(account) {
+    // this is not the most readable, maybe extract part.
+    return (account.split('').reduce(function(prev, curr, index) {
+        return prev + (curr * (9 - index));
+    }, 0) % 11 === 0);
+}
+
 function parseTokens(tokens) {
     return tokens.reduce(function(prev, curr) {
          return prev += parseToken(curr);
@@ -131,3 +138,4 @@ var nine =
 module.exports.parseFile = parseFile;
 module.exports.parse = parse;
 module.exports.tokenize = tokenize;
+module.exports.isValid = isValid;
