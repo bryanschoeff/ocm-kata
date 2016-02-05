@@ -89,6 +89,14 @@ describe('ocr', function () {
             expect(ocr.isValid('345882866')).to.be.false;
         });
     });
+    describe('#reportFile', function () {
+        it('should return the appropriate codes for the the input', function () {
+            var input = '457508000\n664371495\n86110??36';
+            var expectedFile = '457508000\n664371495 ERR\n86110??36 ILL';
+            
+            expect(expectedFile).to.eql(ocr.reportFile(input));
+        });
+    });
 });
 
 

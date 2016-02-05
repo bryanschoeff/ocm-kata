@@ -38,6 +38,21 @@ function isValid(account) {
     }, 0) % 11 === 0);
 }
 
+function reportFile(file) {
+    // This is the best I can seem to do right now,
+    //  but I can't express enough how much I hate 
+    //  this. 
+    return file.split('\n').map(function(line) {
+        if (line.includes('?')) {
+            return line + ' ILL';
+        } else if (isValid(line)) {
+            return line;
+        } else {
+            return line + ' ERR';
+        }
+    }).join('\n');
+}
+
 function parseTokens(tokens) {
     return tokens.reduce(function(prev, curr) {
          return prev += parseToken(curr);
@@ -139,3 +154,4 @@ module.exports.parseFile = parseFile;
 module.exports.parse = parse;
 module.exports.tokenize = tokenize;
 module.exports.isValid = isValid;
+module.exports.reportFile = reportFile;
